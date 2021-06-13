@@ -1,0 +1,109 @@
+.table-container{
+  padding: 0.5rem;
+}
+
+table{
+  border-spacing: 0;
+  width: 100%;
+}
+
+td,th{
+  margin: 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  text-align: left;
+}
+
+th .data{
+  font-weight: 800;
+}
+
+.data{
+  border:none;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.data:focus{
+  outline: none;
+}
+
+.view{
+  caret-color: transparent;
+  border : 1px solid #fff;
+}
+
+.editable{
+  border : 1px solid rgb(201, 199, 199);
+  border-radius: 4px;
+}
+
+.editable:focus{
+  border:1px solid rgb(46, 121, 218);
+}
+
+.footer{
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.del-btn{
+  background: rgb(247, 43, 84);
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  height: 3rem;
+  align-self: center;
+}
+
+.del-btn.disabled{
+  background: rgb(224, 107, 131);
+  color: rgb(212, 212, 212);
+}
+
+.pagination-block{
+  list-style: none;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.page-no{
+  height: 3.5rem;
+  width: 3.5rem;
+  background: rgb(46, 121, 218);
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem 0.5rem;
+  vertical-align: center;
+  cursor: pointer;
+  border: 1px solid rgb(46, 121, 218);
+  border-radius: 30px;
+}
+
+.page-no.active{
+  background: #fff;
+  color:rgb(46, 121, 218);
+}
+
+.page-no.disable{
+  background-color: rgb(233, 233, 233);
+  border-color: rgb(185, 185, 185);
+  color: rgb(185, 185, 185);
+}
+
+.page-no .content{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
