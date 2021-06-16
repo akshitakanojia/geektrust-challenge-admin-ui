@@ -14,9 +14,9 @@ body {
 }
 
 .search-box{
-  border-radius: 4px;
+  border-radius: 0.25rem;
   border:1px solid #a7a7a7;
-  height : 40px;
+  height : 2.5rem;
   padding: 0.5rem 1rem;
   width: 100%;
   font-family: inherit;
@@ -29,4 +29,25 @@ body {
 
 .search-box:focus{
   outline: none;
+}
+
+.spinner-wrapper{
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  padding: 150px 0;
+}
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #000;
+  animation: spinner .6s linear infinite;
 }

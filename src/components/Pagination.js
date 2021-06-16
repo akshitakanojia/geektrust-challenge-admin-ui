@@ -7,7 +7,7 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
   const [end, setEnd] = useState(Math.min(limit, totalPages));
   const [pageNumbers, setPageNumbers] = useState(range(start, end, 1));
 
-  useEffect(() => {
+  const checkRange = () => {
     if (currentPage > end) {
       setPageNumbers(range(Math.max(currentPage - limit + 1, 1), Math.min(currentPage, totalPages), 1))
       setStart(Math.max(currentPage - limit + 1, 1))
@@ -18,11 +18,16 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
       setStart(Math.max(currentPage, 1))
       setEnd(Math.min(currentPage - 1 + limit, totalPages))
     }
+
     if ((((end-start+1)<limit) && end<totalPages) || end>totalPages){
       setPageNumbers(range(Math.max(totalPages - limit +1,1), totalPages, 1))
       setStart(Math.max(totalPages - limit +1,1))
       setEnd(totalPages)
     }
+  }
+
+  useEffect(() => {
+    checkRange();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, totalPages, limit])
 
@@ -32,7 +37,6 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
 
   const jump = (page) => {
     const pageNumber = Math.max(1, page);
-    console.log(Math.min(pageNumber, totalPages));
     setCurrentPage((currentPage) => Math.min(pageNumber, totalPages));
   }
 
@@ -41,8 +45,7 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
   const first = () => setCurrentPage(1);
 
   return (
-    <>
-    {totalPages>1&&<ul className="pagination-block">
+    <ul className="pagination-block">
       <li className={`page-no${currentPage===1?" disable":""}`} onClick={first}>
         <div className="content">
           &lt;&lt;
@@ -69,8 +72,7 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
           &gt;&gt;
         </div>
       </li>
-    </ul>}
-    </>
+    </ul>     
   )
 }
 

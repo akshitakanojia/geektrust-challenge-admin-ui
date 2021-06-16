@@ -10,12 +10,16 @@ table{
 td,th{
   margin: 0;
   padding: 0.5rem;
-  border-bottom: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid #e6e6e6;
   text-align: left;
 }
 
 th .data{
   font-weight: 800;
+}
+
+tr.selected{
+  background-color: #f7f7f7;
 }
 
 .data{
@@ -30,18 +34,23 @@ th .data{
   outline: none;
 }
 
-.view{
+.data.view{
   caret-color: transparent;
   border : 1px solid #fff;
 }
 
-.editable{
-  border : 1px solid rgb(201, 199, 199);
-  border-radius: 4px;
+.data.selected{
+  background-color: #f7f7f7;
+  border-color: #f7f7f7 ;
 }
 
-.editable:focus{
-  border:1px solid rgb(46, 121, 218);
+.data.editable{
+  border : 1px solid #e6e6e6;
+  border-radius: 0.25rem;
+}
+
+.data.editable:focus{
+  border:1px solid #2e79da;
 }
 
 .footer{
@@ -52,8 +61,8 @@ th .data{
 }
 
 .del-btn{
-  background: rgb(247, 43, 84);
-  border-radius: 25px;
+  background: #f72b54;
+  border-radius: 1.5rem;
   padding: 0.5rem 1rem;
   white-space: nowrap;
   border: none;
@@ -65,8 +74,8 @@ th .data{
 }
 
 .del-btn.disabled{
-  background: rgb(224, 107, 131);
-  color: rgb(212, 212, 212);
+  background: #e06b83;
+  color: #d4d4d4;
 }
 
 .pagination-block{
@@ -81,25 +90,25 @@ th .data{
 .page-no{
   height: 2.5rem;
   width: 2.5rem;
-  background: rgb(46, 121, 218);
+  background: #2e79da;
   color: #fff;
   padding: 0.5rem;
   margin: 1rem 0.5rem;
   vertical-align: center;
   cursor: pointer;
-  border: 1px solid rgb(46, 121, 218);
-  border-radius: 30px;
+  border: 1px solid #2e79da;
+  border-radius: 1.8rem;
 }
 
 .page-no.active{
   background: #fff;
-  color:rgb(46, 121, 218);
+  color:#2e79da;
 }
 
 .page-no.disable{
-  background-color: rgb(233, 233, 233);
-  border-color: rgb(185, 185, 185);
-  color: rgb(185, 185, 185);
+  background-color: #e9e9e9;
+  border-color: #b9b9b9;
+  color: #b9b9b9;
 }
 
 .page-no .content{
@@ -107,3 +116,25 @@ th .data{
   font-size: 1.2rem;
 }
 
+.action-icon{
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.fallback{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+  padding: 2rem 0;
+  color: #606060;
+}
+
+.fallback-img-container{
+  display: flex;
+  justify-content: center;
+}
+
+.fallback-img{
+  width: 40vw;
+}

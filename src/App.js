@@ -1,29 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MembersTable from './components/MembersTable';
 
+import './App.css';
+import MembersTable from './components/MembersTable';
+import noData from './assets/No_data.png'
 
 function App() {
   const [members, setMembers] = useState(null);
   const [filteredMembers, setFilteredMembers] = useState(null);
   const [searchString, setSearchString] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const fetchMembers = async() => {
+  const fetchMembers = async () => {
+    setLoading(true);
     return await axios.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
       .then((response => {
+        setLoading(false);
+        setIsError(false);
         setMembers(response.data.map((row) => ({ ...row, isChecked: false })));
       }))
-      .catch(error => console.log(error))
+      .catch(error => {
+        setLoading(false)
+        setIsError(true);
+      })
   }
 
   useEffect(() => {
     fetchMembers()
   }, [])
 
-
   useEffect(() => {
     if (searchString?.length > 0) {
-      setFilteredMembers(members.filter(member => {
+      setFilteredMembers(members?.filter(member => {
         if (member.name?.toLowerCase().includes(searchString.toLowerCase())
           || member.email?.toLowerCase().includes(searchString.toLowerCase())
           || member.role?.toLowerCase().includes(searchString.toLowerCase())
@@ -39,7 +48,7 @@ function App() {
 
   const handleCheck = (id) => {
     let tempMembers = [...members]
-    tempMembers.forEach(member => { 
+    tempMembers.forEach(member => {
       if (member.id === id) {
         member.isChecked = !member.isChecked;
       }
@@ -80,14 +89,24 @@ function App() {
           placeholder="Search by name, email or role" />
       </div>
       {
-        filteredMembers &&
-        <MembersTable
-          members={filteredMembers}
-          onCheck={handleCheck}
-          onDelete={handleDelete}
-          onDeleteSelected={handleDeleteSelected}
-          onEdit={handleEdit}
-        />
+        isLoading ?
+          <div className="spinner-wrapper">
+            <div className="spinner"></div>
+          </div>
+          : isError ?
+            <div className="fallback">
+              Unable to fetch data at the moment
+              <div className="fallback-img-container">
+                <img className="fallback-img" src={noData} />
+              </div>
+            </div>
+            : filteredMembers && <MembersTable
+              members={filteredMembers}
+              onCheck={handleCheck}
+              onDelete={handleDelete}
+              onDeleteSelected={handleDeleteSelected}
+              onEdit={handleEdit}
+            />
       }
     </div>
   );

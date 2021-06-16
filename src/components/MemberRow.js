@@ -7,8 +7,12 @@ const MemberRow = ({ row, onRowCheck, onRowDelete, onRowEdit, onClickEdit, token
   const [editedValues, setEditedValues] = useState(initialValues);
 
   useEffect(() => {
+    setEditedValues(row)
+  }, [row])
+
+  useEffect(() => {
     token === row.id ? setEditMode(true) : setEditMode(false);
-  }, [token,row.id])
+  }, [token, row.id])
 
   const handleCheck = () => onRowCheck(row.id);
 
@@ -41,11 +45,11 @@ const MemberRow = ({ row, onRowCheck, onRowDelete, onRowEdit, onClickEdit, token
   }
 
   return (
-    <tr>
+    <tr className={row.isChecked ? "selected" : ""}>
       <td><input type="checkbox" onChange={handleCheck} checked={row.isChecked ? "checked" : ""} /></td>
       <td>
         <div className="inp-wrapper">
-          <input className={`data ${editMode ? "editable" : "view"}`}
+          <input className={`data${row.isChecked ? " selected" : ""}${editMode ? " editable" : " view"}`}
             name="name"
             value={editedValues.name}
             onChange={handleEdit} />
@@ -53,7 +57,7 @@ const MemberRow = ({ row, onRowCheck, onRowDelete, onRowEdit, onClickEdit, token
       </td>
       <td>
         <div className="inp-wrapper">
-          <input className={`data ${editMode ? "editable" : "view"}`}
+          <input className={`data${row.isChecked ? " selected" : ""}${editMode ? " editable" : " view"}`}
             name="email"
             value={editedValues.email}
             onChange={handleEdit} />
@@ -61,23 +65,30 @@ const MemberRow = ({ row, onRowCheck, onRowDelete, onRowEdit, onClickEdit, token
       </td>
       <td>
         <div className="inp-wrapper">
-          <input className={`data ${editMode ? "editable" : "view"}`}
+          <input className={`data${row.isChecked ? " selected" : ""}${editMode ? " editable" : " view"}`}
             name="role"
             value={editedValues.role}
             onChange={handleEdit} />
         </div>
       </td>
       <td>
-        {editMode ? <><span onClick={handleSave} style={{marginRight:"1rem",cursor:"pointer"}} ><span className="material-icons">
-          save
-        </span></span>     <span onClick={handleCancel} style={{marginRight:"0.5rem",cursor:"pointer"}}><span className="material-icons">
-          close
-        </span></span></>
-          : <><span onClick={handleEditMode} style={{marginRight:"1rem",cursor:"pointer"}}><span className="material-icons">
-            edit
-          </span></span>     <span onClick={handleDelete} style={{marginRight:"0.5rem",cursor:"pointer"}}><span className="material-icons">
-            delete
-          </span></span></>}
+        {editMode ?
+          <>
+            <span className="material-icons action-icon" onClick={handleSave} >
+              save
+            </span>
+            <span className="material-icons action-icon" onClick={handleCancel} >
+              close
+            </span>
+          </>
+          : <>
+            <span className="material-icons action-icon" onClick={handleEditMode} >
+              edit
+            </span>
+            <span className="material-icons action-icon" onClick={handleDelete} >
+              delete
+            </span>
+          </>}
       </td>
     </tr>
   )
