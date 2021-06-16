@@ -60,7 +60,7 @@ th .data{
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
-  height: 3rem;
+  height: 2.5rem;
   align-self: center;
 }
 
@@ -79,11 +79,11 @@ th .data{
 }
 
 .page-no{
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
   background: rgb(46, 121, 218);
   color: #fff;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: 1rem 0.5rem;
   vertical-align: center;
   cursor: pointer;

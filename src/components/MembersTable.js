@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MemberRow from './MemberRow'
 import "./MembersTable.css"
 import Pagination from './Pagination';
 
-export const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onEdit }) => {
+const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onEdit }) => {
   const maxItem = 10;
   const maxPageNumber = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,6 +16,7 @@ export const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onE
     if (currentPage > totalPages && totalPages !== 0) {
       setCurrentPage(totalPages)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [members?.length, totalPages])
 
   const currentData = () => {
@@ -23,16 +24,17 @@ export const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onE
     const end = begin + maxItem;
     return members.slice(begin, end);
   }
-
+  
   useEffect(() => {
-    console.log(Math.ceil(members?.length / maxItem));
     setTotalPages(Math.ceil(members?.length / maxItem));
     setAnyCheck(members.reduce((i, member) => i || member.isChecked, false));
   }, [members])
-
+  
   useEffect(() => {
     setAllCheckOnPage(currentData().reduce((i, member) => i && member.isChecked, true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, members, currentData()])
+  
 
   const handleAllRowsCheck = (e) => {
     if (e.target.checked)
@@ -95,3 +97,5 @@ export const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onE
     </div>
   )
 }
+
+export default MembersTable

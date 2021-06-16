@@ -23,7 +23,8 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
       setStart(Math.max(totalPages - limit +1,1))
       setEnd(totalPages)
     }
-  }, [currentPage, totalPages])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, totalPages, limit])
 
   const next = () => setCurrentPage((currentPage) => Math.min(currentPage + 1, totalPages));
 
@@ -42,12 +43,12 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
   return (
     <>
     {totalPages>1&&<ul className="pagination-block">
-      <li className={`page-no ${currentPage===1&&" disable"}`} onClick={first}>
+      <li className={`page-no${currentPage===1?" disable":""}`} onClick={first}>
         <div className="content">
           &lt;&lt;
         </div>
       </li>
-      <li className={`page-no ${currentPage===1&&" disable"}`} onClick={previous}>
+      <li className={`page-no${currentPage===1?" disable":""}`} onClick={previous}>
         <div className="content">
           &lt;
         </div>
@@ -58,12 +59,12 @@ const Pagination = ({ currentPage, limit, totalPages, setCurrentPage }) => {
             <div className="content">{page}</div>
           </li>)
       }
-      <li className={`page-no ${currentPage===totalPages&&" disable"}`} onClick={next}>
+      <li className={`page-no${currentPage===totalPages?" disable":""}`} onClick={next}>
         <div className="content">
           &gt;
         </div>
       </li>
-      <li className={`page-no ${currentPage===totalPages&&" disable"}`} onClick={last}>
+      <li className={`page-no${currentPage===totalPages?" disable":""}`} onClick={last}>
         <div className="content">
           &gt;&gt;
         </div>

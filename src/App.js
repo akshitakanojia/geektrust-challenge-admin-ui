@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { MembersTable } from './components/MembersTable';
+import MembersTable from './components/MembersTable';
 
 
 function App() {
@@ -8,12 +8,16 @@ function App() {
   const [filteredMembers, setFilteredMembers] = useState(null);
   const [searchString, setSearchString] = useState('');
 
-  useEffect(() => {
-    axios.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
+  const fetchMembers = async() => {
+    return await axios.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
       .then((response => {
         setMembers(response.data.map((row) => ({ ...row, isChecked: false })));
       }))
       .catch(error => console.log(error))
+  }
+
+  useEffect(() => {
+    fetchMembers()
   }, [])
 
 
@@ -70,6 +74,7 @@ function App() {
     <div className="container">
       <div className="search-container">
         <input className="search-box"
+          name="search"
           value={searchString}
           onChange={(e) => setSearchString(e.target.value)}
           placeholder="Search by name, email or role" />
