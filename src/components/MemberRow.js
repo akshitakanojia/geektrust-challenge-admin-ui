@@ -72,23 +72,25 @@ const MemberRow = ({ row, onRowCheck, onRowDelete, onRowEdit, onClickEdit, token
         </div>
       </td>
       <td>
-        {editMode ?
-          <>
-            <span className="material-icons action-icon" onClick={handleSave} >
-              save
-            </span>
-            <span className="material-icons action-icon" onClick={handleCancel} >
-              close
-            </span>
-          </>
-          : <>
-            <span className="material-icons action-icon" onClick={handleEditMode} >
-              edit
-            </span>
-            <span className="material-icons action-icon" onClick={handleDelete} >
-              delete
-            </span>
-          </>}
+        <div className="actions">
+          {editMode ?
+            <>
+              <span className="material-icons action-icon" onClick={handleSave} >
+                save
+              </span>
+              <span className="material-icons action-icon" onClick={handleCancel} >
+                close
+              </span>
+            </>
+            : <>
+              <span className="material-icons action-icon" onClick={handleEditMode} >
+                edit
+              </span>
+              <span className="material-icons action-icon" onClick={handleDelete} >
+                delete
+              </span>
+            </>}
+        </div>
       </td>
     </tr>
   )

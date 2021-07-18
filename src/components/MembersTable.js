@@ -62,34 +62,36 @@ const MembersTable = ({ members, onCheck, onDelete, onDeleteSelected, onEdit }) 
   return (
     <>
       {members?.length > 0 ?
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th><input type="checkbox"
-                  onChange={handleAllRowsCheck}
-                  checked={anyCheck ? allCheckOnPage ? "checked" : "" : ""} /></th>
-                <th><div className="data">Name</div></th>
-                <th><div className="data">Email</div></th>
-                <th><div className="data">Role</div></th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                data?.map(member =>
-                  <MemberRow key={member.id}
-                    row={member}
-                    onRowCheck={handleRowCheck}
-                    onRowDelete={handleRowDelete}
-                    onRowEdit={handleRowEdit}
-                    onClickEdit={handleEditLock}
-                    token={token}
-                  />
-                )
-              }
-            </tbody>
-          </table>
+        <div className="main-container">
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox"
+                    onChange={handleAllRowsCheck}
+                    checked={anyCheck ? allCheckOnPage ? "checked" : "" : ""} /></th>
+                  <th><div className="data">Name</div></th>
+                  <th><div className="data">Email</div></th>
+                  <th><div className="data">Role</div></th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  data?.map(member =>
+                    <MemberRow key={member.id}
+                      row={member}
+                      onRowCheck={handleRowCheck}
+                      onRowDelete={handleRowDelete}
+                      onRowEdit={handleRowEdit}
+                      onClickEdit={handleEditLock}
+                      token={token}
+                    />
+                  )
+                }
+              </tbody>
+            </table>
+          </div>
           <div className="footer">
             <button className={`del-btn${!anyCheck ? " disabled" : ""}`} disabled={!anyCheck ? "disabled" : ""} onClick={handleDelete}>Delete seleted</button>
             {
